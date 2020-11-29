@@ -1,0 +1,54 @@
+name: Rolling Docker
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  docker-build-push:
+    name: Build & Push
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        jgroups: [3.6.20, 4.2.4, 5.0.0]
+    steps:
+      - 
+        name: Checkout
+        uses: actions/checkout@v2
+      - 
+        name: Extract Repo Owner
+        shell: bash
+        run: echo "##[set-output name=owner;]$(echo ${GITHUB_REPOSITORY%%/*} | tr '[:upper:]' '[:lower:]')"
+        id: extract_owner
+      -
+        name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+      - 
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      - 
+        name: Login to GHCR
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ steps.extract_owner.outputs.owner }}
+          password: ${{ secrets.CR_PAT }}
+      -
+        name: Build and Push
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: "./Dockerfile"
+          platforms: linux/amd64,linux/arm64/v8,linux/arm/v6,linux/arm/v7,linux/386
+          push: true
+          build-args: |
+            JGROUPS_VERSION=${{ matrix.jgroups }}
+          tags: |
+            ghcr.io/${{ steps.extract_owner.outputs.owner }}/jgroups:v${{ matrix.jgroups }}
+          no-cache: false
+          labels: |
+            org.opencontainers.image.title=JGroups
+            org.opencontainers.image.description=${{ github.event.repository.description }}
+            org.opencontainers.image.url=${{ github.event.repository.html_url }}
+            org.opencontainers.image.source=${{ github.event.repository.html_url }}
