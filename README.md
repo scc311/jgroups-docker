@@ -15,6 +15,15 @@ FROM ghcr.io/scc311/jgroups:v3.6.20
 
 The images can be found on the Github Container Registry [here](https://github.com/orgs/scc311/packages/container/jgroups).
 
+---
+All prebuilt images are available on the following platforms 💻:
+ - amd64 (x86_64)
+ - i386 (x86)
+ - arm64/v8
+ - arm/v7
+ - arm/v6
+---
+
 ## Building Your Own 🔨
 
 You can build your own version of the base image too! Make any change to the Dockerfile and just run build.
