@@ -48,7 +48,7 @@ jobs:
             ghcr.io/${{ steps.extract_owner.outputs.owner }}/jgroups:v${{ matrix.jgroups }}
           no-cache: false
           labels: |
-            org.opencontainers.image.title=JGroups
+            org.opencontainers.image.title=jgroups
             org.opencontainers.image.description=${{ github.event.repository.description }}
             org.opencontainers.image.url=${{ github.event.repository.html_url }}
             org.opencontainers.image.source=${{ github.event.repository.html_url }}
