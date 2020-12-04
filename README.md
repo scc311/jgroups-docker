@@ -46,6 +46,10 @@ To run this, just build both the frontend example and backed example Docker imag
 
 If you need any more help with Docker, have a look at the Docker Tutorial [here](https://github.com/scc311/docker-tutorial).
 
-## Improve Me
+## CI [Github Actions] 🚀
 
-Feel free to submit a PR if you fix any issues with this 🙂
+This project uses Github Actions to automatically build the container images for all the specified architectures and push them to the container registry. See how that works in the workflow file [here](./.github/workflows/docker-rolling.yml).
+
+## Improve Me ⚙️
+
+If you notice an problem with the code in this repository and don't know how to fix it, submit an issue via Github. Otherwise, if you want to fix something yourself (or improve something), submit a pull request via Github! 🙂
