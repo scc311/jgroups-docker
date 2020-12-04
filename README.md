@@ -13,6 +13,8 @@ FROM ghcr.io/scc311/jgroups:v3.6.20
 ```
 > Tags `v4.2.4` and `5.0.0` are also available
 
+Any code you now compile in the Dockerfile or specify to run on entry in the built container can use both the standard java libraries and jgroups with no need to alter the classpath.
+
 The images can be found on the Github Container Registry [here](https://github.com/orgs/scc311/packages/container/jgroups).
 
 ---
