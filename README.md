@@ -1,4 +1,6 @@
-# Docker JGroups
+# JGroups [+ Docker 🐳]
+
+This is to be used for SCC311 - Coursework 3 if using JGroups! An alternative approach is also supported using ReST: see [here](https://github.com/scc311/rmi-docker-template/tree/cw3).
 
 This repo contains the Dockerfile that can create a JGroups Docker image. This image can then be used as a base for your coursework to run in.
 
@@ -11,7 +13,7 @@ To use a base image, simply add this to the top of your Dockerfile:
 ```docker
 FROM ghcr.io/scc311/jgroups:v3.6.20
 ```
-> Tags `v4.2.4` and `5.0.0` are also available
+> Tags `v4.2.4` and `v5.0.0` are also available (all use Java 8)
 
 Any code you now compile in the Dockerfile or specify to run on entry in the built container can use both the standard java libraries and jgroups with no need to alter the classpath.
 
@@ -28,7 +30,7 @@ All prebuilt images are available on the following platforms 💻:
 
 ## Building Your Own 🔨
 
-You can build your own version of the base image too! Make any change to the Dockerfile and just run build.
+You can build your own version of the base image too! Make any changes to the Dockerfile and just run a docker build:
 
 ```bash
 docker build --rm -f Dockerfile --build-arg JGROUPS_VERSION=3.6.20 -t jgroups:v3.6.20 .
@@ -44,7 +46,7 @@ The backend server in this example only connects to the JGroups Channel, so it c
 
 As JGroups does a lot with networking, for this, just use the flag `--network host` when running containers so that all containers just bind to the host machines network, much they would not running in docker. They will also need to have the `--privileged` flag.
 
-To run this, just build both the frontend example and backed example Docker images, then create a single instance of the frontend example, and as many instances you like of the backend example. You should be starting the frontend with an interactive terminal (`-it`) and the backends with a non-interactive terminal (`-t`).
+To run this, just build both the frontend example and backed example Docker images, then create a single instance of the frontend example and as many instances you like of the backend example. You should be starting the frontend with an interactive terminal (`-it`) and the backends with a non-interactive terminal (`-t`).
 
 If you need any more help with Docker, have a look at the Docker Tutorial [here](https://github.com/scc311/docker-tutorial).
 
