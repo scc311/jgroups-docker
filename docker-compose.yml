@@ -1,0 +1,31 @@
+version: "3"
+
+services:
+
+  backend:
+    #no container name so compose scale can work
+    image: example-backend:dev
+    build:
+      context: ./example-backend
+      dockerfile: ./Dockerfile
+    environment:
+      CHANNEL: "EXAMPLE"
+    networks:
+      - example
+    privileged: true
+    
+  frontend:
+    container_name: frontend
+    image: example-frontend:dev
+    build:
+      context: ./example-frontend
+      dockerfile: ./Dockerfile
+    environment:
+      CHANNEL: "EXAMPLE"
+    networks:
+      - example
+    privileged: true
+    tty: false
+
+networks:
+  example:

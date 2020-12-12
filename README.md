@@ -1,10 +1,12 @@
 # JGroups [+ Docker 🐳]
 
-This is to be used for SCC311 - Coursework 3 if using JGroups! An alternative approach is also supported using ReST: see [here](https://github.com/scc311/rmi-docker-template/tree/cw3).
+This is to be used for SCC311 - Coursework 3 if using JGroups!
 
-This repo contains the Dockerfile that can create a JGroups Docker image. This image can then be used as a base for your coursework to run in.
+This repo contains the Dockerfile that can create a JGroups Docker image. This image can then be used as a base for your coursework to build and run in.
 
 Also, you'll find here an example of how to use the JGroups RPC Dispatcher! Please try to use Docker to run it.
+
+---
 
 ## Using as a Base Image 🐳
 
@@ -38,6 +40,8 @@ docker build --rm -f Dockerfile --build-arg JGROUPS_VERSION=3.6.20 -t jgroups:v3
 
 > Feel free to set the JGroups version by changing the build argument (and the tag too)
 
+---
+
 ## Example Usage
 
 This contains a simple frontend server and backend server. The frontend server binds to an RMI Registry & it also joins the JGroups Channel. In the example code, the channel name is set via the environment variable `CHANNEL`. This env var is set with the flag `-e CHANNEL=<channel_name>` when running a container.
@@ -46,13 +50,21 @@ The backend server in this example only connects to the JGroups Channel, so it c
 
 As JGroups does a lot with networking, for this, just use the flag `--network host` when running containers so that all containers just bind to the host machines network, much they would not running in docker. They will also need to have the `--privileged` flag.
 
-To run this, just build both the frontend example and backed example Docker images, then create a single instance of the frontend example and as many instances you like of the backend example. You should be starting the frontend with an interactive terminal (`-it`) and the backends with a non-interactive terminal (`-t`).
+> There are ways to not use the host network, see the compose file
+
+To run this, just build both the frontend example and backed example Docker images, then create a single instance of the frontend example and as many instances you like of the backend example. You should be starting the frontend and backends with a terminal (`-t`).
 
 If you need any more help with Docker, have a look at the Docker Tutorial [here](https://github.com/scc311/docker-tutorial).
+
+**To use Docker Compose with this example, see [here](./COMPOSE.md)**
+
+---
 
 ## CI [Github Actions] 🚀
 
 This project uses Github Actions to automatically build the container images for all the specified architectures and push them to the container registry. See how that works in the workflow file [here](./.github/workflows/docker-rolling.yml).
+
+---
 
 ## Improve Me ⚙️
 
